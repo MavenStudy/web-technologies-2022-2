@@ -1,0 +1,23 @@
+.pizza-card{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.pizza-card__img{
+    width: 100%;
+    height: 300px;
+}
+
+.pizza-card__img > img{
+    width: 100%;
+    height: 100%;
+
+}
+
+.pizza-card__title{
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+}

@@ -1,0 +1,14 @@
+.pizza-button{
+
+}
+.pizza-button__button{
+    width: 100%;
+    padding:20px 40px ;
+    border-radius: 30px;
+    text-align: center;
+    background-color: orange;
+    color: white;
+    display: flex;
+    justify-content: center;
+    border:none;
+}
