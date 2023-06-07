@@ -1,125 +1,112 @@
+<?php
 //1
-<?php
-$a = rand(-10, 10);
-$b = rand(-10, 10);
+$number = 0;
 
-if ($a >= 0 && $b >= 0) {
-    $result = $a - $b;
-    echo "Разность чисел: " . $result;
-} elseif ($a < 0 && $b < 0) {
-    $result = $a * $b;
-    echo "Произведение чисел: " . $result;
-} else {
-    $result = $a + $b;
-    echo "Сумма чисел: " . $result;
-}
-?>
-//2
-<?php
-
-$a = rand(0, 15);
-echo "<br><br>";
-
-echo "От а до 15: ";
-while ($a <= 15) {
-    switch ($a) {
-        default:
-            echo $a . " ";
-            $a++;
-            break;
-    }
-}
-?>
-//3
-<?php
-function plus($a, $b) {
-    return $a + $b;
-}
-
-function minus($a, $b) {
-    return $a - $b;
-}
-
-function multiply($a, $b) {
-    return $a * $b;
-}
-
-function divide($a, $b) {
-    if ($b != 0) {
-        return $a / $b;
+do {
+    if ($number === 0) {
+        echo $number . ' - это ноль.';
+    } elseif ($number % 2 === 0) {
+        echo $number . ' - чётное число.';
     } else {
-        return "Нельзя делить на 0";
+        echo $number . ' - нечётное число.';
     }
-}
-$a = rand(0, 9);
-$b = rand(0, 9);
-echo "<br><br>";
-echo "Сложение " . plus($a, $b) . "<br>";
-echo "Вычитание: " . minus($a, $b) . "<br>";
-echo "Умножение: " . multiply($a, $b) . "<br>";
-echo "Деление: " . divide($a, $b) . "<br>";
+    echo '<br>';
+    $number++;
+} while ($number <= 10);
 
-?>
+echo '<br>';
+
+//2 и 6
+$regions = array(
+    'Московская область' => array('Москва', 'Зеленоград', 'Клин'),
+    'Ленинградская область' => array('Санкт-Петербург', 'Всеволожск', 'Павловск', 'Кронштадт'),
+    'Рязанская область' => array('Рязань', 'Касимов', 'Скопин', 'Сасово')
+);
+
+$regionsKeys = array_keys($regions);
+$regionsCount = count($regions);
+
+for ($i = 0; $i < $regionsCount; $i++) {
+    $region = $regionsKeys[$i];
+    $cities = $regions[$region];
+
+    echo $region . ':<br>';
+
+    $citiesCount = count($cities);
+    for ($j = 0; $j < $citiesCount; $j++) {
+        echo $cities[$j];
+        if ($j < $citiesCount - 1) {
+            echo ', ';
+        }
+
+
+    }
+    for ($k = 0; $k < $citiesCount; $k++) {
+        $city = $cities[$k];
+        if (mb_substr($city, 0, 1) === 'К') {
+            echo '<br> На К: ' . $city;
+        }
+
+    }
+
+    echo '<br><br>';
+}
+//3
+function transliterate($string) {
+    $translitArray = array(
+        'а' => 'a',
+        'б' => 'b',
+        'в' => 'v',
+        'г' => 'g',
+        'д' => 'd',
+        'е' => 'e',
+        'ё' => 'yo',
+        'ж' => 'zh',
+        'з' => 'z',
+        'и' => 'i',
+        'й' => 'y',
+        'к' => 'k',
+        'л' => 'l',
+        'м' => 'm',
+        'н' => 'n',
+        'о' => 'o',
+        'п' => 'p',
+        'р' => 'r',
+        'с' => 's',
+        'т' => 't',
+        'у' => 'u',
+        'ф' => 'f',
+        'х' => 'h',
+        'ц' => 'ts',
+        'ч' => 'ch',
+        'ш' => 'sh',
+        'щ' => 'sch',
+        'ъ' => '',
+        'ы' => 'y',
+        'ь' => '',
+        'э' => 'e',
+        'ю' => 'yu',
+        'я' => 'ya'
+    );
+
+    $transliteratedString = '';
+    $string = mb_strtolower($string);
+    $stringLength = mb_strlen($string);
+
+    for ($i = 0; $i < $stringLength; $i++) {
+        $char = mb_substr($string, $i, 1);
+        $transliteratedString .= $translitArray[$char] ?? $char;
+    }
+
+    return $transliteratedString;
+}
+
+$inputString = 'Лекция';
+$transliteratedString = transliterate($inputString);
+echo $transliteratedString;
+
 //4
-<?php
-function mathOperation($arg1, $arg2, $operation) {
+require ("generate.php");
 
-    $operationName = '';
-    switch ($operation) {
-        case 1:
-            $operationName = 'Сложение';
-            $result = plus($arg1, $arg2);
-            break;
-        case 2:
-            $operationName = 'Вычитание';
-            $result = minus($arg1, $arg2);
-            break;
-        case 3:
-            $operationName = 'Умножение';
-            $result = multiply($arg1, $arg2);
-            break;
-        case 4:
-            $operationName = 'Деление';
-            $result = divide($arg1, $arg2);
-            break;
-        default:
-            return 'Неизвестная операция';
+require ("engine/index.php");
 
-     return $operationName . ": " . $result;
-    }
-    return $operationName . ": " . $result;
-}
-
-$arg1 = rand(0, 9);
-$arg2 = rand(0, 9);
-$operation = rand(0, 4);
-
-echo "<br><br>";
-echo mathOperation($arg1, $arg2, $operation) ;
-
-?>
-//5
-<?php
-echo "<br><br>";
-
-$date =  date('Y');
-$content = file_get_contents('index.html');
-$content = str_replace("{{ date }}", $date, $content);
-
-require('date.php');
-echo $date;
-echo $content;
-?>
-//6
-<?php
-echo "<br><br>";
-function power($val, $pow) {
-    if ($pow == 0) {
-        return 1;
-    }
-    return $val * power($val, $pow - 1);
-}
-$val = rand(1, 9);
-$pow = rand(0, 3);
-echo "Число $val в степени $pow: " . power($val, $pow);
-?>
