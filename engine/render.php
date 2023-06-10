@@ -1,7 +1,7 @@
 <?php
 function render($page, $params = [], $layout = 'layout') {
     return renderTemplate(LAYOUTS_DIR . $layout, [
-        'menu' => renderTemplate('menu'),
+        'menu' => renderTemplate('menu', $params),
         'content' => renderTemplate($page, $params),
     ]);
 }
