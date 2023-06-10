@@ -1,8 +1,0 @@
-.pizza-catalog{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    width: 60%;
-    flex-wrap: wrap;
-    gap: 20px 20px;
-    margin-top:60px;
-}
